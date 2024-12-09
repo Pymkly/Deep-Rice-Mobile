@@ -1,1 +1,1 @@
-# Deep-Rice
+# Deep-Rice Mobile
