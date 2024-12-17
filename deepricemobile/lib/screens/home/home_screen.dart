@@ -1,7 +1,5 @@
-import 'package:deepricemobile/screens/home/disease_classification/disease_classification_screen.dart';
 import 'package:deepricemobile/screens/home/header/main_header.dart';
 import 'package:deepricemobile/screens/home/landing/landing_page.dart';
-import 'package:deepricemobile/screens/home/menu/main_menu.dart';
 import 'package:deepricemobile/screens/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'footer/main_footer.dart';
@@ -18,18 +16,11 @@ class _HomeScreenStateManager extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> screens = const [
-      LandingPage(),
-      MainMenu(),
-      DiseaseClassificationScreen()
-    ];
-    MainFooter mainFooter = prepareFooter();
     return Scaffold(
       appBar: const MainHeader(),
       body: SingleChildScrollView(
-        child: screens[_currentIndex],
-      ),
-      bottomNavigationBar: mainFooter.build()
+        child: LandingPage(),
+      )
     );
   }
 

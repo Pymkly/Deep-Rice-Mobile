@@ -1,14 +1,19 @@
 import 'package:deepricemobile/utils/utils.dart';
 import 'package:deepricemobile/widgets/button/action_button.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CustomMarginButton extends ActionButton {
   static const double BOX_MIN_WIDTH = 200;
   static const double BOX_MAX_WIDTH = 200;
+  static const double BOX_HEIGHT = 40;
   static const double MIN_WIDTH = 200;
   static const double MIN_HEIGHT = 200;
+  static const double FS = 18;
   late double _margin;
+  late double _fs;
   late double _boxMinWidth;
+  late double _boxHeight;
   late double _boxMaxWidth;
   late double _minWidth;
   late double _minHeight;
@@ -17,13 +22,17 @@ class CustomMarginButton extends ActionButton {
     double boxMinWidth= BOX_MIN_WIDTH,
     double boxMaxWidth= BOX_MAX_WIDTH,
     double minWidth= MIN_WIDTH,
-    double minHeight= MIN_HEIGHT
+    double minHeight= MIN_HEIGHT,
+    double boxHeight= BOX_HEIGHT,
+    double fs= FS,
   }) {
     this.margin = margin;
     this.boxMinWidth = boxMinWidth;
     this.boxMaxWidth = boxMaxWidth;
     this.minWidth = minWidth;
     this.minHeight = minHeight;
+    this.height = boxHeight;
+    this.fs = fs;
   }
 
   @override
@@ -32,7 +41,7 @@ class CustomMarginButton extends ActionButton {
       constraints: BoxConstraints(
         minWidth: boxMinWidth, // Largeur minimale globale
         maxWidth: boxMaxWidth, // Largeur maximale
-        maxHeight: 50
+        maxHeight: height
       ),
       child: ElevatedButton(
         onPressed: () {
@@ -41,7 +50,11 @@ class CustomMarginButton extends ActionButton {
         style: ElevatedButton.styleFrom(
           minimumSize: Size(minWidth, minHeight)
         ),
-        child: Text(label),
+        child: Text(label,
+          style: GoogleFonts.nunito(
+            fontSize: fs
+          ),
+        ),
       ),
     );
     response = DeepFarmUtils.addBorder(response, margin);
@@ -82,6 +95,18 @@ class CustomMarginButton extends ActionButton {
       throw ArgumentError('La hauteur minimale ne peut pas être négative.');
     }
     _minHeight = value;
+  }
+
+  double get height => _boxHeight;
+
+  set height(double value) {
+    _boxHeight = value;
+  }
+
+  double get fs => _fs;
+
+  set fs(double value) {
+    _fs = value;
   }
 
   double get margin => _margin;

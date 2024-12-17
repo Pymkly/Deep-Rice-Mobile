@@ -8,6 +8,7 @@ plugins {
 android {
     namespace = "com.example.deepricemobile"
     compileSdk = flutter.compileSdkVersion
+//    ndkVersion = "25.1.8937393"
     ndkVersion = flutter.ndkVersion
 
     compileOptions {

@@ -1,3 +1,6 @@
+import 'package:deepricemobile/screens/home/landing/separator.dart';
+import 'package:deepricemobile/screens/home/landing/service_component.dart';
+import 'package:deepricemobile/utils/utils.dart';
 import 'package:flutter/material.dart';
 
 import 'banner.dart';
@@ -7,9 +10,13 @@ class LandingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       children: [
-        CustomBanner()
+        const CustomBanner(),
+        const SizedBox(height: 20),
+        CustomSectionSeparator(DeepFarmUtils.extractENV("BANNER_OFFERS_SEPARATOR")),
+        const SizedBox(height: 20),
+        ServiceList()
       ],
     );
   }

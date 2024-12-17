@@ -5,6 +5,8 @@ import '../widgets/button/button_listener.dart';
 
 class DeepFarmUtils {
   static const double DEFAULT_MARGIN = 16.0;
+  static const Color greenColor = Color(0xFF74ae8a);
+  static const Color blueColor = Color(0xFF0080ff);
 
   static String extractENV(String key, {String defaultValue = "Value"}) {
     return dotenv.env[key]?? defaultValue;
