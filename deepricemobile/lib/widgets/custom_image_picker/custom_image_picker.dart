@@ -6,31 +6,45 @@ import 'dart:io';
 import '../../utils/utils.dart';
 
 class ImagePickerScreen extends StatefulWidget {
+  // final Function(File?) onImagePicked;
+  final Function(List<File>?) onImagesPicked; // Callback pour remonter les images
+  // ImagePickerScreen({super.key, required this.onImagePicked});
+  ImagePickerScreen({super.key, required this.onImagesPicked});
+
   @override
   _ImagePickerScreenState createState() => _ImagePickerScreenState();
 }
 
 class _ImagePickerScreenState extends State<ImagePickerScreen> {
-  File? _image; // Stocke l'image sélectionnée
+  // File? _image; // Stocke l'image sélectionnée
+  List<File> _images = [];
   final ImagePicker _picker = ImagePicker();
 
-  // Fonction pour sélectionner une image à partir de la galerie
-  Future<void> _pickImageFromGallery() async {
-    final XFile? pickedFile = await _picker.pickImage(source: ImageSource.gallery);
-    if (pickedFile != null) {
+  Future<void> _pickImagesFromGallery() async {
+    final List<XFile>? pickedFiles = await _picker.pickMultiImage();
+    if (pickedFiles != null) {
       setState(() {
-        _image = File(pickedFile.path);
+        // _images = pickedFiles.map((pickedFile) => File(pickedFile.path)).toList();
+        _images.addAll(pickedFiles.map((pickedFile) => File(pickedFile.path)));
       });
+      widget.onImagesPicked(_images); // Notifie la classe parente
     }
   }
 
+  void _removeImage(File image) {
+    setState(() {
+      _images.remove(image); // Retire l'image sélectionnée
+    });
+    widget.onImagesPicked(_images);
+  }
   // Fonction pour prendre une photo avec la caméra
   Future<void> _takePhoto() async {
     final XFile? pickedFile = await _picker.pickImage(source: ImageSource.camera);
     if (pickedFile != null) {
       setState(() {
-        _image = File(pickedFile.path);
+        _images.add(File(pickedFile.path));
       });
+      widget.onImagesPicked(_images);
     }
   }
 
@@ -46,43 +60,67 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
             // mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               MaterialButton(
-                  onPressed: _pickImageFromGallery,
+                  // onPressed: _pickImageFromGallery,
+                  onPressed: _pickImagesFromGallery,
                   color: DeepFarmUtils.blueColor,
-                  padding: EdgeInsets.all(12.5),
+                  padding: const EdgeInsets.all(12.5),
                   height: width,
                   minWidth: width,
-                  child: Icon(Icons.photo_library, size: 40, color: Colors.white,)
+                  child: const Icon(Icons.photo_library, size: 40, color: Colors.white,)
               ),
               const SizedBox(width: 20,),
               MaterialButton(
                 // shape: CircleBorder(),
                   onPressed: _takePhoto,
                   color: DeepFarmUtils.blueColor,
-                  padding: EdgeInsets.all(12.5),
+                  padding: const EdgeInsets.all(12.5),
                   height: width,
                   minWidth: width,
-                  child: Icon(Icons.camera_alt, size: 40, color: Colors.white,)
+                  child: const Icon(Icons.camera_alt, size: 40, color: Colors.white,)
               ),
             ],
           ),
         ),
         const SizedBox(height: 20,),
-        if (_image != null) ...[
-          Container(
-            // margin: EdgeInsets.only(left: 0),
-            child: Row(
-              children: [
-                const SizedBox(width: 20,),
-                Image.file(
-                  _image!,
-                  width: 100,
-                  height: 100,
-                  fit: BoxFit.cover,
-                )
-              ],
-            ),
-          ),
-        ],
+        if (_images.isNotEmpty)
+          Wrap(
+            spacing: 10,
+            runSpacing: 10,
+            alignment: WrapAlignment.start,
+            children: _images.map((image) {
+              return Stack(
+                children: [
+                  Image.file(
+                    image,
+                    width: 100,
+                    height: 100,
+                    fit: BoxFit.cover,
+                  ),
+                  Positioned(
+                    top: 5,
+                    right: 5,
+                    child: GestureDetector(
+                      onTap: () {
+                        _removeImage(image);
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.black.withOpacity(0.5),
+                          shape: BoxShape.circle,
+                        ),
+                        padding: EdgeInsets.all(5),
+                        child: Icon(
+                          Icons.close,
+                          size: 16,
+                          color: Colors.white,
+                        ),
+                      ),
+                    )
+                  )
+                ]
+              );
+            }).toList(),
+          )
       ],
     );
   }

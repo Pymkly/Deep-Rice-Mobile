@@ -8,10 +8,17 @@ import '../../../utils/utils.dart';
 class ServiceList extends StatelessWidget {
   final List<Map> services = [
     {
+      'title': 'Disease detection',
       'link' : '/disease-detection',
       'illustration' : 'images/landing/services/disease-detection.jpg',
       'shortDescription' : 'Disease classification identifies and categorizes plant diseases to improve diagnosis and treatment. It helps farmers protect crops effectively.'
-    }
+    },
+    {
+      'title': 'Drone Reports',
+      'link' : '/drone-reports',
+      'illustration' : 'images/landing/services/drone-reports.jpg',
+      'shortDescription' : 'Drone reports capture high-resolution images of rice fields, analyze plant health, and detect diseases. The data is processed to identify infected areas and generate a map highlighting affected parcels, enabling precise and efficient interventions for farmers.'
+    },
   ];
   @override
   Widget build(BuildContext context) {
@@ -22,7 +29,7 @@ class ServiceList extends StatelessWidget {
       ),
       child: Column(
         children: services.map((service) {
-            ServiceInfo info = ServiceInfo(service['illustration'], service['shortDescription'], service['link']);
+            ServiceInfo info = ServiceInfo(service['illustration'], service['shortDescription'], service['link'], service['title']);
             return ServiceComponent(info);
           }).toList(),
       )
@@ -93,7 +100,7 @@ class ServiceDetailsSection extends StatelessWidget {
             children: [
               const SizedBox(width: 20),
               Expanded(
-                child: Text("Disease detection", style: GoogleFonts.nunito(
+                child: Text(service.title, style: GoogleFonts.nunito(
                   fontSize: 18.6,
                   fontWeight: FontWeight.w800,
                   color: DeepFarmUtils.greenColor
@@ -189,6 +196,7 @@ class ServiceInfo {
   late String illustration;
   late String shortDescription;
   late String link;
+  late String title;
 
-  ServiceInfo(this.illustration, this.shortDescription, this.link);
+  ServiceInfo(this.illustration, this.shortDescription, this.link, this.title);
 }

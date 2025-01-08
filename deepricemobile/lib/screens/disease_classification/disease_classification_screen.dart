@@ -1,5 +1,4 @@
 import 'package:deepricemobile/screens/home/header/main_header.dart';
-import 'package:deepricemobile/screens/home/landing/landing_page.dart';
 import 'package:deepricemobile/screens/main_screen.dart';
 import 'package:flutter/material.dart';
 

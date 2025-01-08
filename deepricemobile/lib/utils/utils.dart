@@ -12,6 +12,10 @@ class DeepFarmUtils {
     return dotenv.env[key]?? defaultValue;
   }
 
+  static String baseUrl() {
+    return extractENV("APIBASEURL");
+  }
+
   static double extractDoubleConfig(String key) {
     return double.parse(dotenv.env[key]?? '20');
   }

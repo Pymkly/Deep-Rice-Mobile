@@ -24,9 +24,13 @@ class MainHeader extends StatelessWidget implements PreferredSizeWidget {
       child:
         AppBar(
           elevation: 0,
-          leading: IconButton(onPressed: () {
-            Navigator.pushNamed(context, "/");
-          }, icon: Icon(Icons.arrow_back, color: Colors.grey[800], size: iconSize)),
+          leading: Navigator.canPop(context) && ModalRoute.of(context)?.settings.name != "/" ? IconButton(
+              onPressed: () {
+                // Navigator.pushNamed(context, "/");
+                Navigator.pop(context);
+              },
+              icon: Icon(Icons.arrow_back, color: Colors.grey[800], size: iconSize)
+          ) : null,
           backgroundColor: Colors.transparent,
           title: Text(
             dotenv.env['APP_TITLE']?? 'Application',
