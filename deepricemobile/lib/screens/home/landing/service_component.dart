@@ -8,6 +8,18 @@ import '../../../utils/utils.dart';
 class ServiceList extends StatelessWidget {
   final List<Map> services = [
     {
+      'title': 'Sensor Data Monitoring',
+      'link' : '/monitoring/map',
+      'illustration' : 'images/landing/services/monitoring.png',
+      'shortDescription' : 'A dedicated monitoring system that provides real-time visualization of sensor data collected from rice fields.'
+    },
+    {
+      'title': 'Smart Agri Chat',
+      'link' : '/agri-chat',
+      'illustration' : 'images/landing/services/agent.jpg',
+      'shortDescription' : 'Get expert advice on rice farming with AI-powered insights. Ask anything and receive instant.'
+    },
+    {
       'title': 'Disease detection',
       'link' : '/disease-detection',
       'illustration' : 'images/landing/services/disease-detection.jpg',
@@ -17,7 +29,7 @@ class ServiceList extends StatelessWidget {
       'title': 'Drone Reports',
       'link' : '/drone-reports',
       'illustration' : 'images/landing/services/drone-reports.jpg',
-      'shortDescription' : 'Drone reports capture high-resolution images of rice fields, analyze plant health, and detect diseases. The data is processed to identify infected areas and generate a map highlighting affected parcels, enabling precise and efficient interventions for farmers.'
+      'shortDescription' : 'Drone reports capture high-resolution images of rice fields, analyze plant health, and detect diseases.'
     },
   ];
   @override
@@ -154,7 +166,7 @@ class ServiceImageSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: isDetail? 250 : 200,
+      height: isDetail? 200 : 250,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(borderRadiusValue()),

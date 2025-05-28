@@ -37,7 +37,7 @@ class _DroneReportDetailState extends State<DroneReportDetail> {
   Future<void> fetchDroneReport() async {
     try {
       var baseUrl = DeepFarmUtils.baseUrl();
-      final url = '$baseUrl/drone-report/${widget.reportId}'; // Remplacez par votre URL
+      final url = '$baseUrl/drone-reports/${widget.reportId}'; // Remplacez par votre URL
       final response = await http.get(Uri.parse(url));
 
       if (response.statusCode == 200) {

@@ -29,7 +29,7 @@ class DiseaseScanListener extends ButtonListener {
 
   Future<void> predictDisease(List<File> imageFiles) async {
     var baseUrl = DeepFarmUtils.baseUrl();
-    final url = Uri.parse("$baseUrl/predict-disease/");
+    final url = Uri.parse("$baseUrl/disease-detection/images");
     try {
       // Prépare la requête multipart
       final request = http.MultipartRequest('POST', url);

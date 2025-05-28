@@ -12,8 +12,14 @@ class DeepFarmUtils {
     return dotenv.env[key]?? defaultValue;
   }
 
+  static String ipServer() {
+    return extractENV("IP");
+  }
+
   static String baseUrl() {
-    return extractENV("APIBASEURL");
+    var url = extractENV("APIBASEURL");
+    url = "http://${ipServer()}$url";
+    return url;
   }
 
   static double extractDoubleConfig(String key) {

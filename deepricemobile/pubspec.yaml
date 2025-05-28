@@ -41,6 +41,7 @@ dependencies:
   google_maps_flutter: ^2.2.0
   flutter_map: ^4.0.0
   latlong2: ^0.8.1
+  web_socket_channel: ^2.4.0
 
 dev_dependencies:
   flutter_test:
@@ -72,6 +73,8 @@ flutter:
     - images/landing/banner/tanimbary.jpg
     - images/landing/services/disease-detection.jpg
     - images/landing/services/drone-reports.jpg
+    - images/landing/services/agent.jpg
+    - images/landing/services/monitoring.png
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
