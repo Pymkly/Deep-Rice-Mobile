@@ -9,48 +9,57 @@ class ServiceList extends StatelessWidget {
   final List<Map> services = [
     {
       'title': 'Sensor Data Monitoring',
-      'link' : '/monitoring/map',
-      'illustration' : 'images/landing/services/monitoring.png',
-      'shortDescription' : 'A dedicated monitoring system that provides real-time visualization of sensor data collected from rice fields.'
+      'link': '/monitoring/map',
+      'illustration': 'images/landing/services/monitoring.png',
+      'shortDescription':
+          'A dedicated monitoring system that provides real-time visualization of sensor data collected from rice fields.'
     },
     {
       'title': 'Smart Agri Chat',
-      'link' : '/agri-chat',
-      'illustration' : 'images/landing/services/agent.jpg',
-      'shortDescription' : 'Get expert advice on rice farming with AI-powered insights. Ask anything and receive instant.'
+      'link': '/agri-chat',
+      'illustration': 'images/landing/services/agent.jpg',
+      'shortDescription':
+          'Get expert advice on rice farming with AI-powered insights. Ask anything and receive instant.'
     },
     {
       'title': 'Disease detection',
-      'link' : '/disease-detection',
-      'illustration' : 'images/landing/services/disease-detection.jpg',
-      'shortDescription' : 'Disease classification identifies and categorizes plant diseases to improve diagnosis and treatment. It helps farmers protect crops effectively.'
+      'link': '/disease-detection',
+      'illustration': 'images/landing/services/disease-detection.jpg',
+      'shortDescription':
+          'Disease classification identifies and categorizes plant diseases to improve diagnosis and treatment. It helps farmers protect crops effectively.'
     },
     {
       'title': 'Drone Reports',
-      'link' : '/drone-reports',
-      'illustration' : 'images/landing/services/drone-reports.jpg',
-      'shortDescription' : 'Drone reports capture high-resolution images of rice fields, analyze plant health, and detect diseases.'
+      'link': '/drone-reports',
+      'illustration': 'images/landing/services/drone-reports.jpg',
+      'shortDescription':
+          'Drone reports capture high-resolution images of rice fields, analyze plant health, and detect diseases.'
+    },
+    {
+      'title': 'Water Management',
+      'link': '/water/dashboard',
+      'illustration':
+          'images/landing/services/irrigation.png',  
+      'shortDescription':
+          'Smart irrigation management system that predicts water needs and optimizes water usage for rice fields.'
     },
   ];
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.fromLTRB(0, 20,0, 20),
-      decoration: BoxDecoration(
-        color: Colors.white
-      ),
-      child: Column(
-        children: services.map((service) {
-            ServiceInfo info = ServiceInfo(service['illustration'], service['shortDescription'], service['link'], service['title']);
+        padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
+        decoration: BoxDecoration(color: Colors.white),
+        child: Column(
+          children: services.map((service) {
+            ServiceInfo info = ServiceInfo(service['illustration'],
+                service['shortDescription'], service['link'], service['title']);
             return ServiceComponent(info);
           }).toList(),
-      )
-    );
+        ));
   }
-
 }
 
-class ServiceComponent extends StatelessWidget{
+class ServiceComponent extends StatelessWidget {
   final ServiceInfo service;
   const ServiceComponent(this.service, {super.key});
 
@@ -60,17 +69,15 @@ class ServiceComponent extends StatelessWidget{
       margin: const EdgeInsets.fromLTRB(30, 15, 30, 15),
       // padding: configPadding(),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: const BorderRadius.all(Radius.circular(18)),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.shade200,
-            spreadRadius: 4,
-            blurRadius: 6,
-            offset: const Offset(0, 3)
-          )
-        ]
-      ),
+          color: Colors.white,
+          borderRadius: const BorderRadius.all(Radius.circular(18)),
+          boxShadow: [
+            BoxShadow(
+                color: Colors.grey.shade200,
+                spreadRadius: 4,
+                blurRadius: 6,
+                offset: const Offset(0, 3))
+          ]),
       child: Column(
         children: [
           ServiceImageSection(service),
@@ -85,8 +92,7 @@ class ServiceComponent extends StatelessWidget{
         DeepFarmUtils.extractDoubleConfig('BANNER_PDL'),
         DeepFarmUtils.extractDoubleConfig('BANNER_PDT'),
         DeepFarmUtils.extractDoubleConfig('BANNER_PDR'),
-        DeepFarmUtils.extractDoubleConfig('BANNER_PDB')
-    );
+        DeepFarmUtils.extractDoubleConfig('BANNER_PDB'));
   }
 }
 
@@ -94,7 +100,7 @@ class ServiceDetailsSection extends StatelessWidget {
   final ServiceInfo service;
   late bool isDetail = false;
 
-  ServiceDetailsSection(this.service, {bool isDetail=false}) {
+  ServiceDetailsSection(this.service, {bool isDetail = false}) {
     this.isDetail = isDetail;
   }
 
@@ -112,22 +118,24 @@ class ServiceDetailsSection extends StatelessWidget {
             children: [
               const SizedBox(width: 20),
               Expanded(
-                child: Text(service.title, style: GoogleFonts.nunito(
-                  fontSize: 18.6,
-                  fontWeight: FontWeight.w800,
-                  color: DeepFarmUtils.greenColor
-                ))
-              ),
+                  child: Text(service.title,
+                      style: GoogleFonts.nunito(
+                          fontSize: 18.6,
+                          fontWeight: FontWeight.w800,
+                          color: DeepFarmUtils.greenColor))),
               if (!isDetail)
                 MaterialButton(
-                  shape: CircleBorder(),
-                  onPressed: (){
-                    redirect(context);
-                  },
-                  color: DeepFarmUtils.greenColor,
-                  padding: EdgeInsets.all(12.5),
-                  child: Icon(Icons.touch_app, size: 30, color: Colors.white,)
-                ),
+                    shape: CircleBorder(),
+                    onPressed: () {
+                      redirect(context);
+                    },
+                    color: DeepFarmUtils.greenColor,
+                    padding: EdgeInsets.all(12.5),
+                    child: Icon(
+                      Icons.touch_app,
+                      size: 30,
+                      color: Colors.white,
+                    )),
               const SizedBox(width: 20)
             ],
           ),
@@ -136,10 +144,10 @@ class ServiceDetailsSection extends StatelessWidget {
             children: [
               const SizedBox(width: 20),
               Expanded(
-                  child: Text(service.shortDescription, style: GoogleFonts.nunito(
-                    fontSize: 14.6,
-                  ))
-              ),
+                  child: Text(service.shortDescription,
+                      style: GoogleFonts.nunito(
+                        fontSize: 14.6,
+                      ))),
               const SizedBox(width: 20)
             ],
           ),
@@ -148,42 +156,36 @@ class ServiceDetailsSection extends StatelessWidget {
       ),
     );
   }
-
 }
 
 class ServiceImageSection extends StatelessWidget {
   late ServiceInfo service;
   late bool isDetail = false;
 
-  ServiceImageSection(this.service, {bool isDetail=false}) {
+  ServiceImageSection(this.service, {bool isDetail = false}) {
     this.isDetail = isDetail;
   }
 
   double borderRadiusValue() {
-    return isDetail? 0 : 18;
+    return isDetail ? 0 : 18;
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: isDetail? 200 : 250,
+      height: isDetail ? 200 : 250,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(borderRadiusValue()),
             topRight: Radius.circular(borderRadiusValue()),
           ),
           image: DecorationImage(
-              image: AssetImage(service.illustration),
-              fit: BoxFit.cover
-          )
-      ),
+              image: AssetImage(service.illustration), fit: BoxFit.cover)),
       child: Stack(
-        children: [
-        ],
+        children: [],
       ),
     );
   }
-
 }
 
 class ServiceAccessButton extends CustomMarginButton {
@@ -193,15 +195,11 @@ class ServiceAccessButton extends CustomMarginButton {
     margin = 0;
     height = 30;
   }
-
 }
 
 class ServiceAccessListener extends ButtonListener {
   @override
-  void onClick() {
-
-  }
-
+  void onClick() {}
 }
 
 class ServiceInfo {
